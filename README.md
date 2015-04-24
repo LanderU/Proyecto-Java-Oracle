@@ -1,2 +1,2 @@
 # Proyecto-Java-Oracle
-Proyecto Programación con persistencá en BD Oracle SQL
+Proyecto de Programación con persistencia en BD Oracle SQL y NeatBeans
