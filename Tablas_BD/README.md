@@ -4,8 +4,8 @@ Para poder ejecutarlas desde la línea de comandos, primero hemos de añadir los
 
 Añado además dos script's que incluyen la creación y el borrado de la BD.
 
-- "@crearudalekus"
-- "@borrarudalekus"
+- "crearudalekus"
+- "borrarudalekus"
 
 Para su ejecución desde la línea de comandos: 
 
