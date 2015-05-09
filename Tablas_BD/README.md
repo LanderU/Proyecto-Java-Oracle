@@ -1,11 +1,17 @@
-Archivos para la creación de la BD.
+Se añaden los archivos para la creación de las tablas.
 
-Además se añaden dos archivos:
+Para poder ejecutarlas desde la línea de comandos, primero hemos de añadir los archivos de creación en la carpeta BIN de Oracle.
 
-- crearudalekus
--borrarudalekus
+Añado además dos script's que incluyen la creación y el borrado de la BD.
 
-Añadiendo en la carpeta BIN de oracle los archivos de creación. Podemos crear la BD llamando al archivo crearudalekus y borrar la BD llamando al archivo borrarudalekus.
+- "@crearudalekus"
+- "@borrarudalekus"
 
-Estos archivos también hay que meterlos en el BIN de Oracle.
+Para su ejecución desde la línea de comandos: 
+
+SQL> @crearudalekus
+SQL> @borrarudalekus
+
+Lo mismo sucede con el resto de los archivos, se ejecutan de la misma manera.
+Por otro lado estos archivos han de estar presentes también en el BIN de Oracle.
 
