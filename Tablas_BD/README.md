@@ -3,6 +3,8 @@ Se añaden los archivos para la creación de las tablas.
 Para poder ejecutarlas desde la línea de comandos, primero hemos de añadir los archivos de creación en la carpeta "BIN" de Oracle.
 
 Añado además dos script's que incluyen la creación y el borrado de la BD.
+En los archivos que necesitamos insertar numeros para los id, he creado secuencias que lo hacen automáticamente.
+Añado también las provincias y sus respectivos municipios.
 
 - "crearudalekus"
 - "borrarudalekus"
