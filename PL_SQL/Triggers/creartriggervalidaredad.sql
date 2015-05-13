@@ -1,3 +1,4 @@
+--Trigger que impide la inserción de un menor si la edad no está comprendida entre 7 y 13
 CREATE TRIGGER VALIDAREDAD BEFORE INSERT ON MENOR FOR EACH ROW
 DECLARE
 	ANYO NUMBER(4);
