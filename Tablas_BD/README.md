@@ -20,6 +20,9 @@ Para su ejecución desde la línea de comandos:
 Lo mismo sucede con el resto de los archivos, se ejecutan de la misma manera.
 Por otro lado estos archivos han de estar presentes también en el *"BIN"* de Oracle.
 
-Añado también en **crearudalekus** la llamada al script **crearpaqueteudalekus**, para que al mismo tiempo que se crea la *BD* también se crea el paquete correspondiente.
+Añado también en **crearudalekus** la llamada al script **crearpaqueteudalekus** y **creartriggervalidaredad** para que al mismo tiempo que se crea la *BD* también se crea el paquete y trigger correspondiente.
+
+**Nota:** no hace falta borrar el trigger dado que se borra a la hora de borrar la tabla a la cual está asociado. Por otro lado el paquete se vuelve a crear en cada llamada a **@crearudalekus**.
+
 
 

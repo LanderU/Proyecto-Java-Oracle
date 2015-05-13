@@ -18,3 +18,5 @@
 --pause
 @crearpaqueteudalekus
 --pause
+@creartriggervalidaredad
+--pause
