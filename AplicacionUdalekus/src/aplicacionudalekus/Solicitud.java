@@ -23,15 +23,13 @@ public class Solicitud {
 
     //Referencia al Sorteo
     private Sorteo sort = null;
-    
+
     //Referencia a las HojasParticipacion
-    
-    private List <HojaParticipacion> hojasPart = new LinkedList<>();
+    private List<HojaParticipacion> hojasPart = new LinkedList<>();
 
     /**
      * @return the numero
      */
-
     public int getNumero() {
         return numero;
     }
@@ -102,7 +100,7 @@ public class Solicitud {
     /**
      * @return the hojasPart
      */
-    public List <HojaParticipacion> getHojasPart() {
+    public List<HojaParticipacion> getHojasPart() {
         return hojasPart;
     }
 

@@ -10,7 +10,7 @@ package aplicacionudalekus;
  * @author lander
  */
 public class HojaParticipacion {
-    
+
     private String provincia;
     private String municipio;
     private int cp;
@@ -18,15 +18,13 @@ public class HojaParticipacion {
     private int numero;
     private int piso;
     private char letra;
-    
+
     //Necesitamos de la clase Menor y de la clase Tutor
-    
     private Menor men = null;
     private Tutor tut = null;
-    
+
     //Referencia simple a la Solicitud
-    
-    private Solicitud sol =null;
+    private Solicitud sol = null;
 
     /**
      * @return the provincia
@@ -153,8 +151,5 @@ public class HojaParticipacion {
     public void setTut(Tutor tut) {
         this.tut = tut;
     }
-    
-    
-    
-    
+
 }//class
