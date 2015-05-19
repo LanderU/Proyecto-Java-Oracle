@@ -14,8 +14,8 @@ Añado también las provincias y sus respectivos municipios.
 
 Para su ejecución desde la línea de comandos: 
 
-- **SQL> @crearudalekus**
-- **SQL> @borrarudalekus**
+<code>SQL> @crearudalekus</code>
+<code> SQL> @borrarudalekus</code>
 
 Lo mismo sucede con el resto de los archivos, se ejecutan de la misma manera.
 Por otro lado estos archivos han de estar presentes también en el *"BIN"* de Oracle.
