@@ -21,6 +21,9 @@ import oracle.jdbc.internal.OracleTypes;
  * @author lander
  */
 public class VentanaInicial extends javax.swing.JFrame {
+    
+    
+    private Solicitud soli = null;
 
     /**
      * Creates new form VentanaInicial
@@ -29,6 +32,9 @@ public class VentanaInicial extends javax.swing.JFrame {
     private VhojaInscripcion ventHoja;
     public VentanaInicial() {
         initComponents();
+        
+        soli = new Solicitud();
+       
     }
 
     /**
@@ -122,30 +128,32 @@ public class VentanaInicial extends javax.swing.JFrame {
             consulta.registerOutParameter(1, Types.FLOAT);
 
             consulta.execute();
-            //Si fechavalida devuelve 1
+           /* //Si fechavalida devuelve 1
             if (consulta.getFloat(1)!=0) {
                //Sale una ventana diciendo que la fecha no es correcta.
                JOptionPane.showMessageDialog(this, "Error: Fecha equivocada.");
             }else{
                  //Pasamos a la hoja de inscripción
-                
+                */
                 this.setVisible(false);
                 this.ventHoja = new VhojaInscripcion();
                 this.ventHoja.setVisible(true);
-            
+            /*
             }
 
-           
+           */
 
         } catch (SQLException ex) {
             Logger.getLogger(VentanaInicial.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Excepción catch");
+            JOptionPane.showMessageDialog(this, "Error: Imposible conectarse a la BD.");
+          
         } finally {
 
             try {
                 conn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(VentanaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Error: Imposible cerrar la conexión.");
             }
 
         }
@@ -207,5 +215,19 @@ public class VentanaInicial extends javax.swing.JFrame {
      */
     public void setVentHoja(VhojaInscripcion ventHoja) {
         this.ventHoja = ventHoja;
+    }
+
+    /**
+     * @return the soli
+     */
+    public Solicitud getSoli() {
+        return soli;
+    }
+
+    /**
+     * @param soli the soli to set
+     */
+    public void setSoli(Solicitud soli) {
+        this.soli = soli;
     }
 }
