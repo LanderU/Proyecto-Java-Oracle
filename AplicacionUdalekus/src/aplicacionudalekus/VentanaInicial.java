@@ -23,17 +23,19 @@ import oracle.jdbc.internal.OracleTypes;
 public class VentanaInicial extends javax.swing.JFrame {
     
     
-    private Solicitud soli = null;
+    //private Solicitud soli = null;
 
     /**
      * Creates new form VentanaInicial
      */
     
     private VhojaInscripcion ventHoja;
+    
+    
     public VentanaInicial() {
         initComponents();
         
-        soli = new Solicitud();
+       
        
     }
 
@@ -158,6 +160,8 @@ public class VentanaInicial extends javax.swing.JFrame {
 
         }
         
+        if(ventHoja.getSoli().getHojasPart().size()>=3)
+        JOptionPane.showMessageDialog(this, "Ya has creado el máximo de solitides.");
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -215,19 +219,5 @@ public class VentanaInicial extends javax.swing.JFrame {
      */
     public void setVentHoja(VhojaInscripcion ventHoja) {
         this.ventHoja = ventHoja;
-    }
-
-    /**
-     * @return the soli
-     */
-    public Solicitud getSoli() {
-        return soli;
-    }
-
-    /**
-     * @param soli the soli to set
-     */
-    public void setSoli(Solicitud soli) {
-        this.soli = soli;
     }
 }

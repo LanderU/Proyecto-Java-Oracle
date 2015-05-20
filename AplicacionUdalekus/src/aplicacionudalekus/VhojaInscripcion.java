@@ -26,6 +26,7 @@ public class VhojaInscripcion extends javax.swing.JFrame {
     private Solicitud soli;
     private String provincia;
     private Connection conn = null;
+    private VhojaInscripcion vHoja = null;
 
     /**
      * Creates new form VhojaInscripcion
@@ -75,7 +76,9 @@ public class VhojaInscripcion extends javax.swing.JFrame {
         //Instanciamos los objetos
         ventInicial = new VentanaInicial();
         hojaParticipacion = new HojaParticipacion();
+        if(soli == null)
         soli = new Solicitud();
+        
 
     }
 
@@ -385,7 +388,7 @@ public class VhojaInscripcion extends javax.swing.JFrame {
                                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,9 +406,9 @@ public class VhojaInscripcion extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(623, 623, 623)
                                 .addComponent(jButton2)
-                                .addGap(339, 339, 339)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel25)
@@ -424,8 +427,7 @@ public class VhojaInscripcion extends javax.swing.JFrame {
                             .addComponent(jCheckBox3)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(157, 157, 157)
-                                .addComponent(jButton3)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jButton3)))))
                 .addContainerGap(55, Short.MAX_VALUE))
             .addComponent(jSeparator4)
             .addGroup(layout.createSequentialGroup()
@@ -542,6 +544,10 @@ public class VhojaInscripcion extends javax.swing.JFrame {
 
         if (soli.getHojasPart().size() < 3) {
             soli.getHojasPart().add(hojaParticipacion);
+            this.setVisible(false);
+            vHoja = new VhojaInscripcion();
+            vHoja.setVisible(true);
+            
         } else {
             JOptionPane.showMessageDialog(this, "Error: Ya tienes el máximo de solicitudes.");
 
@@ -625,6 +631,7 @@ public class VhojaInscripcion extends javax.swing.JFrame {
             }
 
         }
+        System.out.println(jComboBox1.getSelectedItem());
 
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -706,9 +713,11 @@ public class VhojaInscripcion extends javax.swing.JFrame {
         
         if (soli.getHojasPart().size()<3) {
             soli.getHojasPart().add(hojaParticipacion);
+             
         }else {
         
              JOptionPane.showMessageDialog(this, "Error: No se ha podido cerrar la conexión");
+           
         
         }
         
