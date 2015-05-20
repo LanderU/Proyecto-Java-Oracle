@@ -21,8 +21,10 @@ import oracle.jdbc.internal.OracleTypes;
  * @author lander
  */
 public class VentanaInicial extends javax.swing.JFrame {
-    
-    
+    //Cambiar esto para conectarte a la BD
+    public static final String usuario = "lander";
+    public static final String pass = "si2";
+    public static final String ipPuertoInstancia = "@172.20.224.100:1521:ORCL";
     //private Solicitud soli = null;
 
     /**
@@ -122,7 +124,7 @@ public class VentanaInicial extends javax.swing.JFrame {
         try {
             //Conexión a la BD
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-            conn = DriverManager.getConnection("jdbc:oracle:thin:@172.20.224.100:1521:ORCL", "lander", "si2");
+            conn = DriverManager.getConnection("jdbc:oracle:thin:"+ipPuertoInstancia+", "+usuario+ ", "+pass);
             String sql = "{ call paquete_udalekus.fechavalida (?)}";
 
             CallableStatement consulta = conn.prepareCall(sql);
