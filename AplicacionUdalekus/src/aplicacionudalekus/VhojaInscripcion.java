@@ -223,6 +223,11 @@ public class VhojaInscripcion extends javax.swing.JFrame {
         jLabel23.setText("Centro de Estudio: ");
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
 
         jLabel24.setText("Modelo: ");
 
@@ -520,11 +525,11 @@ public class VhojaInscripcion extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
 
     //Nos quedamos con el Item que nos interesa (Provincia)
-        jLabel15.setText(""+jComboBox1.getSelectedItem());
+       //jLabel15.setText(""+jComboBox1.getSelectedItem());
         //Al pinchar en ella cargamos los datos de la BD
         //Guardamos en una variable intermedia el valor
-        String selProvincia = (String) jLabel15.getText();
-        
+        String selProvincia = (String) jComboBox1.getSelectedItem();
+        jComboBox2.removeAllItems();
         try {
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
             setConn(DriverManager.getConnection("jdbc:oracle:thin:@172.20.224.100:1521:ORCL", "lander", "si2"));
@@ -559,6 +564,44 @@ public class VhojaInscripcion extends javax.swing.JFrame {
             }
 
         }
+        //Sacar centro de estudio.
+        jComboBox4.removeAllItems();
+        try {
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            setConn(DriverManager.getConnection("jdbc:oracle:thin:@172.20.224.100:1521:ORCL", "lander", "si2"));
+            // System.out.println("INFO: Conexión abierta");
+            String sql = "{ call paquete_udalekus.mostrarcentro (?,?)}";
+
+            CallableStatement consulta = getConn().prepareCall(sql);
+
+            consulta.registerOutParameter(1, OracleTypes.CURSOR);
+            consulta.setString(2, selProvincia);
+
+            consulta.execute();
+
+            ResultSet resultado = (ResultSet) consulta.getObject(1);
+
+            while (resultado.next()) {
+                jComboBox4.addItem(resultado.getString("nombre_centro"));
+            }
+
+            resultado.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(VhojaInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error: Imposible conectarse a la BD.");
+        } finally {
+
+            try {
+                getConn().close();
+            } catch (SQLException ex) {
+                Logger.getLogger(VhojaInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Error: No se ha podido cerrar la conexión");
+            }
+
+        }
+        
+        
 
         
         
@@ -570,8 +613,9 @@ public class VhojaInscripcion extends javax.swing.JFrame {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // Mostramos los municipios y nos quedamos con el correspondiente
         
-        jLabel18.setText(""+jComboBox2.getSelectedItem());
-        String selMunicipio = jLabel18.getText();
+       // jLabel18.setText(""+jComboBox2.getSelectedItem());
+        String selMunicipio = (String)jComboBox2.getSelectedItem();
+        jComboBox3.removeAllItems();
         
         try {
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
@@ -617,11 +661,13 @@ public class VhojaInscripcion extends javax.swing.JFrame {
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         //Nos quedamos con el nombre de la calle seleccionada
-        jLabel19.setText(""+jComboBox3.getSelectedItem());
-        String selCalle = jLabel19.getText();
-        
-        
+        String selMunicipio = (String) jComboBox3.getSelectedItem();
+
     }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox4ActionPerformed
 
     /**
      * @param args the command line arguments
