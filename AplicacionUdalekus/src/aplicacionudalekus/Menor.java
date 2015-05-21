@@ -21,6 +21,7 @@ public class Menor extends Persona {
     private String provincia;
     private String municipio;
     private String Calle;
+    private char sexo;
     /**
      * @return the centro
      */
@@ -117,6 +118,20 @@ public class Menor extends Persona {
      */
     public void setCalle(String Calle) {
         this.Calle = Calle;
+    }
+
+    /**
+     * @return the sexo
+     */
+    public char getSexo() {
+        return sexo;
+    }
+
+    /**
+     * @param sexo the sexo to set
+     */
+    public void setSexo(char sexo) {
+        this.sexo = sexo;
     }
     
     

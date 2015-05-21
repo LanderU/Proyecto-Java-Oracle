@@ -810,15 +810,30 @@ public class VhojaInscripcion extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
     private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
-        // TODO add your handling code here:
+        // Miramo si está vacio
+        if (!jCheckBox3.isEnabled()) {
+         hojaParticipacion.getMen().setDiscapacidad(false);
+        }else{
+        hojaParticipacion.getMen().setDiscapacidad(true);
+        }
+        
+        
     }//GEN-LAST:event_jCheckBox3ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
+        // Miramos si está vacio
+        
+        if (!jCheckBox1.isEnabled()) {
+            hojaParticipacion.getMen().setSexo('M');
+        }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
+        // Miramos si está vacio
+        if (!jCheckBox2.isEnabled()) {
+           hojaParticipacion.getMen().setSexo('F');
+        }
+        
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
