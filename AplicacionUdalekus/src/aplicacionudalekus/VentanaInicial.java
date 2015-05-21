@@ -21,10 +21,11 @@ import oracle.jdbc.internal.OracleTypes;
  * @author lander
  */
 public class VentanaInicial extends javax.swing.JFrame {
+
     //Cambiar esto para conectarte a la BD
-    public static final String usuario = "lander";
-    public static final String pass = "si2";
-    public static final String ipPuertoInstancia = "@172.20.224.100:1521:ORCL";
+   // public static final String usuario = "lander";
+   // public static final String pass = "si2";
+   // public static final String ipPuertoInstancia = "@172.20.224.100:1521:ORCL";
     //private Solicitud soli = null;
 
     /**
@@ -32,6 +33,7 @@ public class VentanaInicial extends javax.swing.JFrame {
      */
     
     private VhojaInscripcion ventHoja;
+   // private static SympleDateFormat formato = new SympleDateFormato();
     
     
     public VentanaInicial() {
@@ -54,6 +56,7 @@ public class VentanaInicial extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,17 +77,23 @@ public class VentanaInicial extends javax.swing.JFrame {
         });
 
         jButton3.setText("Ver fecha del Sorteo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Ver Inscripciones");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(104, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,15 +103,24 @@ public class VentanaInicial extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(187, 187, 187))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(131, 131, 131)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addComponent(jButton2)
-                .addGap(47, 47, 47)
+                .addGap(26, 26, 26)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(58, 58, 58)
                 .addComponent(jButton1)
@@ -124,7 +142,7 @@ public class VentanaInicial extends javax.swing.JFrame {
         try {
             //Conexión a la BD
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-            conn = DriverManager.getConnection("jdbc:oracle:thin:"+ipPuertoInstancia+", "+usuario+ ", "+pass);
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@172.20.224.100:1521:ORCL", "lander", "si2");
             String sql = "{ call paquete_udalekus.fechavalida (?)}";
 
             CallableStatement consulta = conn.prepareCall(sql);
@@ -167,6 +185,46 @@ public class VentanaInicial extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // Mostrar la fecha
+        
+         Connection conn = null;
+        try {
+            //Conexión a la BD
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@172.20.224.100:1521:ORCL", "lander", "si2");
+            String sql = "{ call paquete_udalekus.mostrarfechasorteo (?)}";
+
+            CallableStatement consulta = conn.prepareCall(sql);
+
+            consulta.registerOutParameter(1, OracleTypes.VARCHAR);
+            
+            consulta.execute();
+            System.out.println(consulta.getString("fechasorteo"));
+            
+            JOptionPane.showMessageDialog(this,consulta.getString("fechasorteo"));
+         } catch (SQLException ex) {
+            Logger.getLogger(VentanaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error: Imposible conectarse a la BD.");
+          
+        } finally {
+
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(VentanaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Error: Imposible cerrar la conexión.");
+            }
+
+        }
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -206,6 +264,7 @@ public class VentanaInicial extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 

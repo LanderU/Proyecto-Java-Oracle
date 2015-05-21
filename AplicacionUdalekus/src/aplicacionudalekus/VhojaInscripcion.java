@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -24,9 +25,9 @@ public class VhojaInscripcion extends javax.swing.JFrame {
     private HojaParticipacion hojaParticipacion;
     private VentanaInicial ventInicial;
     private Solicitud soli;
-    private String provincia;
     private Connection conn = null;
     private VhojaInscripcion vHoja = null;
+    
 
     /**
      * Creates new form VhojaInscripcion
@@ -76,9 +77,9 @@ public class VhojaInscripcion extends javax.swing.JFrame {
         //Instanciamos los objetos
         ventInicial = new VentanaInicial();
         hojaParticipacion = new HojaParticipacion();
-        if(soli == null)
-        soli = new Solicitud();
-        
+        if (soli == null) {
+            soli = new Solicitud();
+        }
 
     }
 
@@ -164,27 +165,99 @@ public class VhojaInscripcion extends javax.swing.JFrame {
 
         jLabel3.setText("Nombre: ");
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Primer Apellido: ");
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Segundo Apellido: ");
 
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("DNI: ");
+
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Teléfono: ");
 
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
+
         jLabel8.setText("Teléfono 2: ");
+
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Teléfono3: ");
 
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+
         jLabel10.setText("Teléfono4: ");
+
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Nombre: ");
 
+        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField9ActionPerformed(evt);
+            }
+        });
+
         jLabel12.setText("Primer Apellido: ");
+
+        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField10ActionPerformed(evt);
+            }
+        });
 
         jLabel13.setText("Segundo Apellido: ");
 
+        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField11ActionPerformed(evt);
+            }
+        });
+
         jLabel14.setText("DNI: ");
+
+        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField12ActionPerformed(evt);
+            }
+        });
 
         jLabel15.setText("Provincia: ");
 
@@ -196,6 +269,12 @@ public class VhojaInscripcion extends javax.swing.JFrame {
         });
 
         jLabel16.setText("CP: ");
+
+        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField13ActionPerformed(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Waree", 3, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(115, 66, 66));
@@ -221,9 +300,27 @@ public class VhojaInscripcion extends javax.swing.JFrame {
 
         jLabel20.setText("Número: ");
 
+        jTextField14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField14ActionPerformed(evt);
+            }
+        });
+
         jLabel21.setText("Piso: ");
 
+        jTextField15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField15ActionPerformed(evt);
+            }
+        });
+
         jLabel22.setText("Letra: ");
+
+        jTextField16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField16ActionPerformed(evt);
+            }
+        });
 
         jLabel23.setText("Centro de Estudio: ");
 
@@ -246,6 +343,11 @@ public class VhojaInscripcion extends javax.swing.JFrame {
         jLabel25.setText("Fecha Nacimiento: ");
 
         jTextField17.setText("dd/mm/yyyy");
+        jTextField17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField17ActionPerformed(evt);
+            }
+        });
 
         jLabel26.setText("Sexo: ");
 
@@ -547,7 +649,7 @@ public class VhojaInscripcion extends javax.swing.JFrame {
             this.setVisible(false);
             vHoja = new VhojaInscripcion();
             vHoja.setVisible(true);
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "Error: Ya tienes el máximo de solicitudes.");
 
@@ -630,16 +732,17 @@ public class VhojaInscripcion extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error: No se ha podido cerrar la conexión");
             }
 
+               //Nos quedamos con la provincia
+            hojaParticipacion.getMen().setProvincia((String) jComboBox1.getSelectedItem());
+            //Insertamos el dato en la hoja de participación
+
         }
-        System.out.println(jComboBox1.getSelectedItem());
 
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // Mostramos los municipios y nos quedamos con el correspondiente
-
-        // jLabel18.setText(""+jComboBox2.getSelectedItem());
         String selMunicipio = (String) jComboBox2.getSelectedItem();
         jComboBox3.removeAllItems();
 
@@ -677,22 +780,33 @@ public class VhojaInscripcion extends javax.swing.JFrame {
             }
 
         }
+        //Nos quedamos con el municipio seleccionada
+
+        hojaParticipacion.getMen().setMunicipio((String) jComboBox2.getSelectedItem());
 
 
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        //Nos quedamos con el nombre de la calle seleccionada
-        String selMunicipio = (String) jComboBox3.getSelectedItem();
+
+        // Nos quedamos con la calle
+        hojaParticipacion.setCalle((String) jComboBox3.getSelectedItem());
 
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        // TODO add your handling code here:
+        // Nos quedamos con la calle
+        
+        
+        hojaParticipacion.getMen().setCentro((String) jComboBox4.getSelectedItem());
+        
+        
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
-        // TODO add your handling code here:
+        // Modelo
+        
+        hojaParticipacion.getMen().setModelo((char)jComboBox5.getSelectedItem());
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
     private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
@@ -709,26 +823,189 @@ public class VhojaInscripcion extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Miramos cuantas llevamos en el LinkedList
-        
-        
-        if (soli.getHojasPart().size()<3) {
+
+        if (soli.getHojasPart().size() < 3) {
             soli.getHojasPart().add(hojaParticipacion);
-             
-        }else {
-        
-             JOptionPane.showMessageDialog(this, "Error: No se ha podido cerrar la conexión");
-           
-        
+
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Error: No se ha podido cerrar la conexión");
+
         }
-        
+
         //Nos vamos al comienzo
-        
-        
         this.setVisible(false);
         ventInicial.setVisible(true);
-        
-        
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // Recogemos lo escrito
+        hojaParticipacion.getTut().setNombre(jTextField1.getText());
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // Recogemos lo escrito
+
+        hojaParticipacion.getTut().setApellido1(jTextField2.getText());
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // Recogemos el segundo apellido
+
+        hojaParticipacion.getTut().setApellido2(jTextField3.getText());
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        //Recogemos el  Dni
+        hojaParticipacion.getTut().setDni(Integer.parseInt(jTextField4.getText()));
+
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // Teléfono1
+        hojaParticipacion.getTut().setTelefono1(jTextField5.getText());
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // Miramos si ha rellenado
+
+        if (jTextField6.getText() == "") {
+            hojaParticipacion.getTut().setTelefono2(null);
+
+        } else {
+
+            hojaParticipacion.getTut().setTelefono2(jTextField6.getText());
+        }
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // Miramos si ha rellenado
+
+        if (jTextField7.getText() == "") {
+            hojaParticipacion.getTut().setTelefono3(null);
+
+        } else {
+
+            hojaParticipacion.getTut().setTelefono3(jTextField7.getText());
+        }
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        if (jTextField8.getText() == "") {
+            hojaParticipacion.getTut().setTelefono4(null);
+
+        } else {
+
+            hojaParticipacion.getTut().setTelefono4(jTextField8.getText());
+        }
+    }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+        // Recogemos lo que ha metido
+        if (jTextField9.getText() == "") {
+            JOptionPane.showMessageDialog(this, "Campo obligatorio");
+        } else {
+
+            hojaParticipacion.getMen().setNombre(jTextField9.getText());
+        }
+
+    }//GEN-LAST:event_jTextField9ActionPerformed
+
+    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
+        // Miramos si ha rellenado
+
+        if (jTextField12.getText() == "") {
+
+            hojaParticipacion.getTut().setDni(Integer.parseInt(null));
+
+        } else {
+
+            hojaParticipacion.getTut().setDni(Integer.parseInt(jTextField12.getText()));
+        }
+    }//GEN-LAST:event_jTextField12ActionPerformed
+
+    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+        // Primer Apellido
+
+        if (jTextField10.getText() == "") {
+            JOptionPane.showMessageDialog(this, "Hay que rellenar el campo");
+        } else {
+
+            hojaParticipacion.getMen().setApellido1(jTextField10.getText());
+
+        }
+    }//GEN-LAST:event_jTextField10ActionPerformed
+
+    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+        // Segundo Apellido menor
+
+        if (jTextField11.getText() == "") {
+            JOptionPane.showMessageDialog(this, "Hay que rellenar el campo");
+        } else {
+
+            hojaParticipacion.getMen().setApellido2(jTextField11.getText());
+
+        }
+
+    }//GEN-LAST:event_jTextField11ActionPerformed
+
+    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+        // CP
+        if (jTextField13.getText() == "") {
+            JOptionPane.showMessageDialog(this, "Hay que rellenar el campo");
+        } else {
+
+            hojaParticipacion.getMen().setApellido2(jTextField13.getText());
+
+        }
+
+    }//GEN-LAST:event_jTextField13ActionPerformed
+
+    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
+        // Número
+        if (jTextField13.getText() == "") {
+            JOptionPane.showMessageDialog(this, "Hay que rellenar el campo");
+        } else {
+
+            hojaParticipacion.setNumero(Integer.parseInt(jTextField13.getText()));
+
+        }
+
+    }//GEN-LAST:event_jTextField14ActionPerformed
+
+    private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
+        // Piso
+        
+          if (jTextField15.getText() == "") {
+            JOptionPane.showMessageDialog(this, "Hay que rellenar el campo");
+        } else {
+
+            hojaParticipacion.setPiso(Integer.parseInt(jTextField15.getText()));
+
+        }
+        
+    }//GEN-LAST:event_jTextField15ActionPerformed
+
+    private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed
+        // Letra
+             if (jTextField16.getText() == "") {
+            JOptionPane.showMessageDialog(this, "Hay que rellenar el campo");
+        } else {
+
+            hojaParticipacion.setLetra(jTextField16.getText().charAt(0));
+
+        }
+        
+    }//GEN-LAST:event_jTextField16ActionPerformed
+
+    private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField17ActionPerformed
+        // Nos quedamos con la fecha
+      
+       
+        
+    }//GEN-LAST:event_jTextField17ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -867,20 +1144,6 @@ public class VhojaInscripcion extends javax.swing.JFrame {
      */
     public void setSoli(Solicitud soli) {
         this.soli = soli;
-    }
-
-    /**
-     * @return the provincia
-     */
-    public String getProvincia() {
-        return provincia;
-    }
-
-    /**
-     * @param provincia the provincia to set
-     */
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
     }
 
     /**
