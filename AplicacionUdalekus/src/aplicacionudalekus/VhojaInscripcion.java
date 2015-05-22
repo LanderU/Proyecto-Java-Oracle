@@ -27,7 +27,6 @@ public class VhojaInscripcion extends javax.swing.JFrame {
     private Solicitud soli;
     private Connection conn = null;
     private VhojaInscripcion vHoja = null;
-    
 
     /**
      * Creates new form VhojaInscripcion
@@ -646,6 +645,64 @@ public class VhojaInscripcion extends javax.swing.JFrame {
 
         if (soli.getHojasPart().size() < 3) {
             soli.getHojasPart().add(hojaParticipacion);
+            //Insertamos en la BD al menor
+            try {
+                DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+                conn = DriverManager.getConnection("jdbc:oracle:thin:@172.20.224.100:1521:ORCL", "lander", "si2");
+                // System.out.println("INFO: Conexión abierta");
+                String sql = "{ call paquete_udalekus.insertarmenor (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+
+                CallableStatement consulta = conn.prepareCall(sql);
+
+                consulta.setString(1, hojaParticipacion.getMen().getNombre());
+                consulta.setString(2, hojaParticipacion.getMen().getApellido1());
+                consulta.setString(3, hojaParticipacion.getMen().getApellido2());
+                consulta.setInt(4, hojaParticipacion.getMen().getDni());
+                // consulta.setChar(5,(Char)hojaParticipacion.getMen().getSexo());
+                consulta.setString(6, hojaParticipacion.getCalle());
+                consulta.setInt(7, hojaParticipacion.getPiso());
+                consulta.setInt(8, hojaParticipacion.getLetra());
+                consulta.setString(9, hojaParticipacion.getMunicipio());
+                consulta.setString(10, hojaParticipacion.getProvincia());
+                consulta.setInt(11, hojaParticipacion.getCp());
+                consulta.setDate(12, (java.sql.Date) hojaParticipacion.getMen().getFecha_nac());
+                consulta.setString(13, hojaParticipacion.getMen().getCentro());
+                //consulta.setString(14,hojaParticipacion.getMen().getModelo());
+                if (hojaParticipacion.getMen().isDiscapacidad()) {
+                    consulta.setString(15, "Si");
+                } else {
+                    consulta.setString(15, "No");
+                }
+                consulta.execute();
+                //Lo mismo para el tutor
+                String sql1 = "{ call paquete_udalekus.insertartutor (?,?,?,?,?,?,?,?)}";
+
+                CallableStatement consulta1 = conn.prepareCall(sql1);
+                    consulta1.setString(1,hojaParticipacion.getTut().getNombre());
+                    consulta1.setString(2,hojaParticipacion.getTut().getApellido1());
+                    consulta1.setString(3,hojaParticipacion.getTut().getApellido2());
+                    consulta1.setInt(4,hojaParticipacion.getTut().getDni());
+                    consulta1.setString(5,hojaParticipacion.getTut().getTelefono1());
+                    consulta1.setString(6,hojaParticipacion.getTut().getTelefono2());
+                    consulta1.setString(7,hojaParticipacion.getTut().getTelefono3());
+                    consulta1.setString(8,hojaParticipacion.getTut().getTelefono4());
+                    
+                consulta1.execute();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(VhojaInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Error: Imposible conectarse a la BD1.");
+            } finally {
+
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(VhojaInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "Error: No se ha podido cerrar la conexión");
+                }
+
+            }
+
             this.setVisible(false);
             vHoja = new VhojaInscripcion();
             vHoja.setVisible(true);
@@ -732,7 +789,7 @@ public class VhojaInscripcion extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error: No se ha podido cerrar la conexión");
             }
 
-               //Nos quedamos con la provincia
+            //Nos quedamos con la provincia
             hojaParticipacion.getMen().setProvincia((String) jComboBox1.getSelectedItem());
             //Insertamos el dato en la hoja de participación
 
@@ -796,33 +853,32 @@ public class VhojaInscripcion extends javax.swing.JFrame {
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
         // Nos quedamos con la calle
-        
-        
+
         hojaParticipacion.getMen().setCentro((String) jComboBox4.getSelectedItem());
-        
-        
+
+
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
         // Modelo
-        
-        hojaParticipacion.getMen().setModelo((char)jComboBox5.getSelectedItem());
+
+        hojaParticipacion.getMen().setModelo((char) jComboBox5.getSelectedItem());
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
     private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
         // Miramo si está vacio
         if (!jCheckBox3.isEnabled()) {
-         hojaParticipacion.getMen().setDiscapacidad(false);
-        }else{
-        hojaParticipacion.getMen().setDiscapacidad(true);
+            hojaParticipacion.getMen().setDiscapacidad(false);
+        } else {
+            hojaParticipacion.getMen().setDiscapacidad(true);
         }
-        
-        
+
+
     }//GEN-LAST:event_jCheckBox3ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // Miramos si está vacio
-        
+
         if (!jCheckBox1.isEnabled()) {
             hojaParticipacion.getMen().setSexo('M');
         }
@@ -831,9 +887,9 @@ public class VhojaInscripcion extends javax.swing.JFrame {
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
         // Miramos si está vacio
         if (!jCheckBox2.isEnabled()) {
-           hojaParticipacion.getMen().setSexo('F');
+            hojaParticipacion.getMen().setSexo('F');
         }
-        
+
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -992,34 +1048,33 @@ public class VhojaInscripcion extends javax.swing.JFrame {
 
     private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
         // Piso
-        
-          if (jTextField15.getText() == "") {
+
+        if (jTextField15.getText() == "") {
             JOptionPane.showMessageDialog(this, "Hay que rellenar el campo");
         } else {
 
             hojaParticipacion.setPiso(Integer.parseInt(jTextField15.getText()));
 
         }
-        
+
     }//GEN-LAST:event_jTextField15ActionPerformed
 
     private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed
         // Letra
-             if (jTextField16.getText() == "") {
+        if (jTextField16.getText() == "") {
             JOptionPane.showMessageDialog(this, "Hay que rellenar el campo");
         } else {
 
             hojaParticipacion.setLetra(jTextField16.getText().charAt(0));
 
         }
-        
+
     }//GEN-LAST:event_jTextField16ActionPerformed
 
     private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField17ActionPerformed
         // Nos quedamos con la fecha
-      
-       
-        
+
+
     }//GEN-LAST:event_jTextField17ActionPerformed
 
     /**
