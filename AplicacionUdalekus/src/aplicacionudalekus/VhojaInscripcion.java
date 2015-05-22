@@ -658,14 +658,14 @@ public class VhojaInscripcion extends javax.swing.JFrame {
                 consulta.setString(2, hojaParticipacion.getMen().getApellido1());
                 consulta.setString(3, hojaParticipacion.getMen().getApellido2());
                 consulta.setInt(4, hojaParticipacion.getMen().getDni());
-                // consulta.setChar(5,(Char)hojaParticipacion.getMen().getSexo());
+                consulta.setString(5,String.valueOf(hojaParticipacion.getMen().getSexo()));
                 consulta.setString(6, hojaParticipacion.getCalle());
                 consulta.setInt(7, hojaParticipacion.getPiso());
                 consulta.setInt(8, hojaParticipacion.getLetra());
                 consulta.setString(9, hojaParticipacion.getMunicipio());
                 consulta.setString(10, hojaParticipacion.getProvincia());
                 consulta.setInt(11, hojaParticipacion.getCp());
-                consulta.setDate(12, (java.sql.Date) hojaParticipacion.getMen().getFecha_nac());
+                consulta.setString(12,hojaParticipacion.getMen().getFecha_nac());
                 consulta.setString(13, hojaParticipacion.getMen().getCentro());
                 //consulta.setString(14,hojaParticipacion.getMen().getModelo());
                 if (hojaParticipacion.getMen().isDiscapacidad()) {
@@ -688,6 +688,18 @@ public class VhojaInscripcion extends javax.swing.JFrame {
                     consulta1.setString(8,hojaParticipacion.getTut().getTelefono4());
                     
                 consulta1.execute();
+                
+                //Insertamos en la hoja_inscripcion
+                
+                 String sql2 = "{ call paquete_udalekus.insertarhoja (?,?,?,?)}";
+                 //NUM,PIS,CODIGO,PROV
+                 CallableStatement consulta2 = conn.prepareCall(sql2);
+                 
+                 consulta2.setInt(1, hojaParticipacion.getNumero());
+                 consulta2.setInt(2, hojaParticipacion.getPiso());
+                 consulta2.setInt(3, hojaParticipacion.getCp());
+                 consulta2.setString(4, hojaParticipacion.getProvincia());
+                 
 
             } catch (SQLException ex) {
                 Logger.getLogger(VhojaInscripcion.class.getName()).log(Level.SEVERE, null, ex);
@@ -1073,7 +1085,7 @@ public class VhojaInscripcion extends javax.swing.JFrame {
 
     private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField17ActionPerformed
         // Nos quedamos con la fecha
-
+        
 
     }//GEN-LAST:event_jTextField17ActionPerformed
 

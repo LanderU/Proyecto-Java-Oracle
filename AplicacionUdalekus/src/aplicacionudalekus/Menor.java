@@ -16,7 +16,7 @@ public class Menor extends Persona {
     
     private String centro;
     private char modelo;
-    private Date fecha_nac;
+    private String fecha_nac;
     private boolean discapacidad;
     private String provincia;
     private String municipio;
@@ -50,19 +50,7 @@ public class Menor extends Persona {
         this.modelo = modelo;
     }
 
-    /**
-     * @return the fecha_nac
-     */
-    public Date getFecha_nac() {
-        return fecha_nac;
-    }
-
-    /**
-     * @param fecha_nac the fecha_nac to set
-     */
-    public void setFecha_nac(Date fecha_nac) {
-        this.fecha_nac = fecha_nac;
-    }
+    
 
     /**
      * @return the discapacidad
@@ -132,6 +120,20 @@ public class Menor extends Persona {
      */
     public void setSexo(char sexo) {
         this.sexo = sexo;
+    }
+
+    /**
+     * @return the fecha_nac
+     */
+    public String getFecha_nac() {
+        return fecha_nac;
+    }
+
+    /**
+     * @param fecha_nac the fecha_nac to set
+     */
+    public void setFecha_nac(String fecha_nac) {
+        this.fecha_nac = fecha_nac;
     }
     
     
