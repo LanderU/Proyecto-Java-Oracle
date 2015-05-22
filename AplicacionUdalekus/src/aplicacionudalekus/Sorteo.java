@@ -8,6 +8,7 @@ package aplicacionudalekus;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -85,6 +86,16 @@ public class Sorteo {
     }//calcular_orden
 
     public void sortear() {
+        
+        Random numeroInicial = new Random();
+        
+        
+       int numero = numeroInicial.nextInt(999)+1;
+       
+       //Cadendia
+        
+       Random cadencia = new Random();
+       int cad = cadencia.nextInt(6)+3;
 
     }//sortear
 
