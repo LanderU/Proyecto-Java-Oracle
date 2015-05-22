@@ -700,6 +700,7 @@ public class VhojaInscripcion extends javax.swing.JFrame {
                  consulta2.setInt(3, hojaParticipacion.getCp());
                  consulta2.setString(4, hojaParticipacion.getProvincia());
                  
+                 consulta2.execute();
 
             } catch (SQLException ex) {
                 Logger.getLogger(VhojaInscripcion.class.getName()).log(Level.SEVERE, null, ex);
@@ -909,6 +910,76 @@ public class VhojaInscripcion extends javax.swing.JFrame {
 
         if (soli.getHojasPart().size() < 3) {
             soli.getHojasPart().add(hojaParticipacion);
+            
+                 try {
+                DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+                conn = DriverManager.getConnection("jdbc:oracle:thin:@172.20.224.100:1521:ORCL", "lander", "si2");
+                // System.out.println("INFO: Conexión abierta");
+                String sql = "{ call paquete_udalekus.insertarmenor (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+
+                CallableStatement consulta = conn.prepareCall(sql);
+
+                consulta.setString(1, hojaParticipacion.getMen().getNombre());
+                consulta.setString(2, hojaParticipacion.getMen().getApellido1());
+                consulta.setString(3, hojaParticipacion.getMen().getApellido2());
+                consulta.setInt(4, hojaParticipacion.getMen().getDni());
+                consulta.setString(5,String.valueOf(hojaParticipacion.getMen().getSexo()));
+                consulta.setString(6, hojaParticipacion.getCalle());
+                consulta.setInt(7, hojaParticipacion.getPiso());
+                consulta.setInt(8, hojaParticipacion.getLetra());
+                consulta.setString(9, hojaParticipacion.getMunicipio());
+                consulta.setString(10, hojaParticipacion.getProvincia());
+                consulta.setInt(11, hojaParticipacion.getCp());
+                consulta.setString(12,hojaParticipacion.getMen().getFecha_nac());
+                consulta.setString(13, hojaParticipacion.getMen().getCentro());
+                //consulta.setString(14,hojaParticipacion.getMen().getModelo());
+                if (hojaParticipacion.getMen().isDiscapacidad()) {
+                    consulta.setString(15, "Si");
+                } else {
+                    consulta.setString(15, "No");
+                }
+                consulta.execute();
+                //Lo mismo para el tutor
+                String sql1 = "{ call paquete_udalekus.insertartutor (?,?,?,?,?,?,?,?)}";
+
+                CallableStatement consulta1 = conn.prepareCall(sql1);
+                    consulta1.setString(1,hojaParticipacion.getTut().getNombre());
+                    consulta1.setString(2,hojaParticipacion.getTut().getApellido1());
+                    consulta1.setString(3,hojaParticipacion.getTut().getApellido2());
+                    consulta1.setInt(4,hojaParticipacion.getTut().getDni());
+                    consulta1.setString(5,hojaParticipacion.getTut().getTelefono1());
+                    consulta1.setString(6,hojaParticipacion.getTut().getTelefono2());
+                    consulta1.setString(7,hojaParticipacion.getTut().getTelefono3());
+                    consulta1.setString(8,hojaParticipacion.getTut().getTelefono4());
+                    
+                consulta1.execute();
+                
+                //Insertamos en la hoja_inscripcion
+                
+                 String sql2 = "{ call paquete_udalekus.insertarhoja (?,?,?,?)}";
+                 //NUM,PIS,CODIGO,PROV
+                 CallableStatement consulta2 = conn.prepareCall(sql2);
+                 
+                 consulta2.setInt(1, hojaParticipacion.getNumero());
+                 consulta2.setInt(2, hojaParticipacion.getPiso());
+                 consulta2.setInt(3, hojaParticipacion.getCp());
+                 consulta2.setString(4, hojaParticipacion.getProvincia());
+                 
+                 consulta2.execute();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(VhojaInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Error: Imposible conectarse a la BD1.");
+            } finally {
+
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(VhojaInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "Error: No se ha podido cerrar la conexión");
+                }
+
+            }
 
         } else {
 
@@ -925,30 +996,60 @@ public class VhojaInscripcion extends javax.swing.JFrame {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // Recogemos lo escrito
-        hojaParticipacion.getTut().setNombre(jTextField1.getText());
+        if (jTextField1.getText()=="") {
+            JOptionPane.showMessageDialog(this, "Rellena el campo.");
+        }else{
+        
+            hojaParticipacion.getTut().setNombre(jTextField1.getText());
+        }
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // Recogemos lo escrito
 
-        hojaParticipacion.getTut().setApellido1(jTextField2.getText());
+          if (jTextField2.getText()=="") {
+            JOptionPane.showMessageDialog(this, "Rellena el campo.");
+        }else{
+        
+            hojaParticipacion.getTut().setApellido1(jTextField2.getText());
+        }
+        
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // Recogemos el segundo apellido
-
-        hojaParticipacion.getTut().setApellido2(jTextField3.getText());
+    if (jTextField3.getText()=="") {
+            JOptionPane.showMessageDialog(this, "Rellena el campo.");
+        }else{
+        
+            hojaParticipacion.getTut().setApellido2(jTextField3.getText());
+        }
+        
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         //Recogemos el  Dni
-        hojaParticipacion.getTut().setDni(Integer.parseInt(jTextField4.getText()));
+        if (jTextField4.getText()=="") {
+            JOptionPane.showMessageDialog(this, "Rellena el campo.");
+        }else{
+        
+             hojaParticipacion.getTut().setDni(Integer.parseInt(jTextField4.getText()));
+        }
+        
+       
 
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
         // Teléfono1
-        hojaParticipacion.getTut().setTelefono1(jTextField5.getText());
+          if (jTextField5.getText()=="") {
+            JOptionPane.showMessageDialog(this, "Rellena el campo.");
+        }else{
+        
+             hojaParticipacion.getTut().setTelefono1(jTextField5.getText());
+        }
+        
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
@@ -1085,7 +1186,7 @@ public class VhojaInscripcion extends javax.swing.JFrame {
 
     private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField17ActionPerformed
         // Nos quedamos con la fecha
-        
+        hojaParticipacion.getMen().setFecha_nac(jTextField7.getText());
 
     }//GEN-LAST:event_jTextField17ActionPerformed
 

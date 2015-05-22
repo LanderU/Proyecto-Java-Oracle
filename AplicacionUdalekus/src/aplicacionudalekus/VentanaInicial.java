@@ -27,6 +27,8 @@ public class VentanaInicial extends javax.swing.JFrame {
    // public static final String pass = "si2";
    // public static final String ipPuertoInstancia = "@172.20.224.100:1521:ORCL";
     //private Solicitud soli = null;
+    
+    private VmostrarSolicitudes mostrarSolicitudes = null;
 
     /**
      * Creates new form VentanaInicial
@@ -150,20 +152,20 @@ public class VentanaInicial extends javax.swing.JFrame {
             consulta.registerOutParameter(1, Types.FLOAT);
 
             consulta.execute();
-           /* //Si fechavalida devuelve 1
+            //Si fechavalida devuelve 1
             if (consulta.getFloat(1)!=0) {
                //Sale una ventana diciendo que la fecha no es correcta.
                JOptionPane.showMessageDialog(this, "Error: Fecha equivocada.");
             }else{
                  //Pasamos a la hoja de inscripción
-                */
+                
                 this.setVisible(false);
                 this.ventHoja = new VhojaInscripcion();
                 this.ventHoja.setVisible(true);
-            /*
+            
             }
 
-           */
+           
 
         } catch (SQLException ex) {
             Logger.getLogger(VentanaInicial.class.getName()).log(Level.SEVERE, null, ex);
@@ -186,7 +188,15 @@ public class VentanaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        // Mostramos las inscripciones
+        
+        this.setVisible(false);
+        mostrarSolicitudes = new VmostrarSolicitudes();
+        mostrarSolicitudes.setVisible(true);
+        
+        
+        
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -280,5 +290,19 @@ public class VentanaInicial extends javax.swing.JFrame {
      */
     public void setVentHoja(VhojaInscripcion ventHoja) {
         this.ventHoja = ventHoja;
+    }
+
+    /**
+     * @return the mostrarSolicitudes
+     */
+    public VmostrarSolicitudes getMostrarSolicitudes() {
+        return mostrarSolicitudes;
+    }
+
+    /**
+     * @param mostrarSolicitudes the mostrarSolicitudes to set
+     */
+    public void setMostrarSolicitudes(VmostrarSolicitudes mostrarSolicitudes) {
+        this.mostrarSolicitudes = mostrarSolicitudes;
     }
 }
