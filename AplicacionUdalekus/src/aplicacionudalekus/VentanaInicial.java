@@ -214,7 +214,7 @@ public class VentanaInicial extends javax.swing.JFrame {
             consulta.registerOutParameter(1, OracleTypes.VARCHAR);
             
             consulta.execute();
-            System.out.println(consulta.getString("fechasorteo"));
+            //System.out.println(consulta.getString("fechasorteo"));
             
             JOptionPane.showMessageDialog(this,consulta.getString("fechasorteo"));
          } catch (SQLException ex) {

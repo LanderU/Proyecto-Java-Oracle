@@ -5,10 +5,18 @@
  */
 package aplicacionudalekus;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import oracle.jdbc.internal.OracleTypes;
 
 /**
  *
@@ -85,17 +93,51 @@ public class Sorteo {
 
     }//calcular_orden
 
-    public void sortear() {
+    public void sortear() throws SQLException {
+            Connection conn = null;
+            CallableStatement consulta = null;
+        try {
+            //Conexión a la BD
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@172.20.224.100:1521:ORCL", "lander", "si2");
+            String sql = "{ call paquete_udalekus.mostrarfechasorteo (?)}";
+
+            consulta = conn.prepareCall(sql);
+
+            consulta.registerOutParameter(1, OracleTypes.VARCHAR);
+            
+            consulta.execute();
+            //System.out.println(consulta.getString("fechasorteo"));
+            
+            //JOptionPane.showMessageDialog(this,consulta.getString("fechasorteo"));
+         } catch (SQLException ex) {
+            Logger.getLogger(VentanaInicial.class.getName()).log(Level.SEVERE, null, ex);
+           // JOptionPane.showMessageDialog(this, "Error: Imposible conectarse a la BD.");
+          
+        } finally {
+
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(VentanaInicial.class.getName()).log(Level.SEVERE, null, ex);
+               // JOptionPane.showMessageDialog(this, "Error: Imposible cerrar la conexión.");
+            }
+
+        }
         
-        Random numeroInicial = new Random();
         
         
-       int numero = numeroInicial.nextInt(999)+1;
-       
+        
+        if (consulta.getString("fechasorteo").equalsIgnoreCase("20/04/2015")) {
+            Random numeroInicial = new Random();
+
+            int numero = numeroInicial.nextInt(999) + 1;
+
        //Cadendia
-        
-       Random cadencia = new Random();
-       int cad = cadencia.nextInt(6)+3;
+            Random cadencia = new Random();
+            int cad = cadencia.nextInt(6) + 3;
+
+        }
 
     }//sortear
 
